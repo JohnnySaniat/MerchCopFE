@@ -3,16 +3,19 @@ import { useRouter } from 'next/router';
 import { getProductById } from '../../../api/productData';
 import ProductForm from '../../../components/forms/ProductForm';
 
-function AddProductToCart() {
-  const [addProduct, setAddProduct] = useState({});
+function EditProduct() {
+  const [editProduct, setEditProduct] = useState({});
   const router = useRouter();
+
   const { id } = router.query;
 
   useEffect(() => {
-    getProductById(id).then(setAddProduct);
+    getProductById(id).then(setEditProduct);
   }, [id]);
 
-  return (<ProductForm obj={addProduct} />);
+  return (
+    <ProductForm obj={editProduct} />
+  );
 }
 
-export default AddProductToCart;
+export default EditProduct;
