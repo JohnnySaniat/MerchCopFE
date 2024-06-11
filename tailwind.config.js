@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import daisyui from 'daisyui';
+const daisyui = require('daisyui');
 
 module.exports = {
   content: [
@@ -9,16 +9,25 @@ module.exports = {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  theme: {
+    extend: {},
+  },
   daisyui: {
     themes: [
-      'luxury',
-      'retro',
-      'autumn',
-      'dim',
-      'acid',
-      'coffee',
+      {
+        mytheme: {
+          primary: '#252525',
+          secondary: '#7F181F',
+          accent: '#FACF4C',
+          neutral: '#F37CBD',
+          'base-100': '#171717',
+          info: '#719CB0',
+          success: '#655BBD',
+          warning: '#6F3656',
+          error: '#471E23',
+        },
+      },
     ],
-    base: true,
   },
   plugins: [daisyui],
 };

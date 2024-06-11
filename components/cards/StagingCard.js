@@ -2,13 +2,15 @@
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { removeProductFromOrder } from '../../api/orderData';
+import { useRouter } from 'next/router';
+import { addProductToOrder, getOpenOrder } from '../../api/orderData';
 import { getCollaboratorById } from '../../api/collaboratorData';
 import { getProductTypeById } from '../../api/productTypeData';
 
-function CartProductCard({ productObj, orderId, onUpdate }) {
+function StagingCard({ productObj, onToggleStaging, onUpdate }) {
+  const router = useRouter();
   const [collaboratorName, setCollaboratorName] = useState('');
-  const [productTypeType, setProductTypeName] = useState('');
+  const [productTypeType, setProductTypeType] = useState('');
 
   useEffect(() => {
     if (productObj.collaboratorId) {
@@ -23,7 +25,7 @@ function CartProductCard({ productObj, orderId, onUpdate }) {
     if (productObj.typeId) {
       getProductTypeById(productObj.typeId)
         .then((productType) => {
-          setProductTypeName(productType.type);
+          setProductTypeType(productType.type);
         })
         .catch((error) => {
           console.error('Error fetching product type:', error);
@@ -31,39 +33,64 @@ function CartProductCard({ productObj, orderId, onUpdate }) {
     }
   }, [productObj.collaboratorId, productObj.typeId]);
 
-  const removeThisProduct = () => {
-    if (window.confirm(`Remove ${productObj.productName} from your cart?`)) {
-      removeProductFromOrder(orderId, productObj.id)
-        .then(() => {
-          onUpdate();
-        })
-        .catch((error) => {
-          console.error('Error removing product from order:', error);
-        });
+  const handleToggleStaging = () => {
+    onToggleStaging(productObj.id);
+  };
+
+  const addToOrder = async () => {
+    try {
+      const openOrders = await getOpenOrder();
+      console.log('Open orders:', openOrders);
+
+      if (!openOrders || openOrders.length === 0) {
+        console.error('No open orders found.');
+        return;
+      }
+
+      const productId = productObj.id;
+      const confirmAddToOrder = window.confirm(`Add ${productObj.productName} to your order?`);
+
+      if (confirmAddToOrder) {
+        await Promise.all(openOrders.map((order) => addProductToOrder(order.id, productId)
+          .then(() => console.log(`Product added to order ${order.id} successfully.`))
+          .catch((error) => console.error(`Error adding product to order ${order.id}:`, error))));
+
+        onUpdate();
+        console.log('Product added to all open orders successfully.');
+        router.push('/cart');
+      }
+    } catch (error) {
+      console.error('Error adding product to open orders:', error);
+      router.push('/cart');
     }
   };
 
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl m-3 h-full" data-theme="mytheme">
-      <figure>
-        <img src={productObj.image} alt={productObj.productName} className=" rounded-t-lg w-full" />
-      </figure>
+      <figure><img src={productObj.image} alt={productObj.productName} /></figure>
       <div className="card-body">
         <h2 className="card-title">{productObj.productName}</h2>
         <p>Price: ${productObj.price}</p>
         <p>Collaborator: {collaboratorName}</p>
         <p>{productTypeType}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-warning" onClick={removeThisProduct}>
-            Remove
-          </button>
+          {!productObj.isStaging && (
+            <button className="btn btn-secondary" onClick={handleToggleStaging}>
+              Toggle Staging
+            </button>
+          )}
+          {productObj.isStaging && (
+            <button className="btn btn-warning" onClick={addToOrder}>
+              Add to Order
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-CartProductCard.propTypes = {
+StagingCard.propTypes = {
   productObj: PropTypes.shape({
     id: PropTypes.number.isRequired,
     productName: PropTypes.string.isRequired,
@@ -76,8 +103,8 @@ CartProductCard.propTypes = {
     isSolvedArtistChallenge: PropTypes.bool,
     image: PropTypes.string,
   }).isRequired,
-  orderId: PropTypes.number.isRequired,
+  onToggleStaging: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
 
-export default CartProductCard;
+export default StagingCard;

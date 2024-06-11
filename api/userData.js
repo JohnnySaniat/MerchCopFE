@@ -84,10 +84,30 @@ const switchUserToSeller = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getAllUsers = () => new Promise((resolve, reject) => {
+  fetch('https://localhost:7043/users', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.message || 'Failed to fetch users');
+        });
+      }
+      return response.json();
+    })
+    .then((data) => resolve(data))
+    .catch((error) => reject(new Error(`Failed to fetch users: ${error.message}`)));
+});
+
 export {
   getUserById,
   updateUser,
   getUserDetails,
   createUser,
   switchUserToSeller,
+  getAllUsers,
 };

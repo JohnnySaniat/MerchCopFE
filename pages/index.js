@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
@@ -23,7 +22,7 @@ function Home() {
     if (countdown > 0 && !bypass) {
       timer = setTimeout(() => setCountdown(countdown - 1), 1000);
     } else if (countdown === 0) {
-      router.push('/staging.js');
+      router.push('/staging');
     }
     return () => clearTimeout(timer);
   }, [countdown, bypass]);
@@ -40,34 +39,37 @@ function Home() {
   };
 
   return (
-    <>
+    <div className="flex justify-center items-center mt-8 w-100 h-100">
       {authUser?.uid === user?.uid ? (
-        <div className="home-container">
-          <h1 className="greeting">Hello {user?.fbUser?.displayName}!</h1>
-          {!bypass && (
-            <div className="countdown-container">
-              <h2>Countdown: {countdown}s</h2>
-              <Form onSubmit={(e) => { e.preventDefault(); handleSecretCodeSubmit(); }}>
-                <Form.Group controlId="secretCode">
-                  <Form.Label>Enter Secret Code to Bypass Countdown</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={secretCode}
-                    onChange={(e) => setSecretCode(e.target.value)}
-                    className="secret-code-input"
-                  />
-                </Form.Group>
-                <Button variant="danger" type="submit" className="submit-button">
-                  Submit
-                </Button>
-              </Form>
-            </div>
-          )}
+        <div className="card w-96 glass text-white">
+          <img src="https://i.ibb.co/X2ZPdLv/Merch-Cop2.png" alt="Merch Cop" className="mb-4" style={{ width: '400px' }} />
+          <div className="card-body flex flex-col items-center">
+            <h2 className="card-title text-2xl mb-2 greeting">Hello {user?.fbUser?.displayName}!</h2>
+            {!bypass && (
+              <div className="flex flex-col items-center">
+                <h3 className="mb-4">Countdown: {countdown}s</h3>
+                <Form onSubmit={(e) => { e.preventDefault(); handleSecretCodeSubmit(); }} className="flex flex-col items-center">
+                  <Form.Group controlId="secretCode" className="mb-4">
+                    <Form.Label className="mb-2">Enter Secret Code to Bypass Countdown</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={secretCode}
+                      onChange={(e) => setSecretCode(e.target.value)}
+                      className="w-full py-2 px-4 rounded-md border border-gray-300 focus:outline-none focus:border-blue-400"
+                    />
+                  </Form.Group>
+                  <Button variant="danger" type="submit" className="py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600">
+                    Submit
+                  </Button>
+                </Form>
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         <RegisterForm user={user} onUpdate={onUpdate} />
       )}
-    </>
+    </div>
   );
 }
 

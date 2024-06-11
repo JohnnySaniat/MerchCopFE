@@ -36,11 +36,15 @@ function RegisterForm({ userObj, onUpdate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const payload = {
+      ...formData, uid: user.uid, isSeller: false, isAdmin: false,
+    };
+
     if (userObj.id) {
-      updateUser(userObj.id, formData)?.then(onUpdate);
+      updateUser(userObj.id, payload)?.then(onUpdate);
       router.push('/');
     } else {
-      createUser({ uid: user.uid, ...formData })?.then(onUpdate);
+      createUser(payload)?.then(onUpdate);
       router.push('/');
     }
   };
@@ -52,96 +56,78 @@ function RegisterForm({ userObj, onUpdate }) {
   }, [userObj]);
 
   return (
-    <div className="flex w-[500px] mx-auto inter-normal">
+    <div className="flex w-[500px] mx-auto inter-normal text-white">
       <div className="mx-auto mt-32">
         <Form onSubmit={handleSubmit} className="w-96">
           <Form.Group className="mb-3" controlId="formBasicFirstName">
-            <Form.Label>First Name</Form.Label>
+            <Form.Label className="text-black">First Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter first name"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className="input rounded-none"
+              className="input rounded-none bg-white text-black"
               required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicLastName">
-            <Form.Label>Last Name</Form.Label>
+            <Form.Label className="text-black">Last Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter last name"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className="input rounded-none"
+              className="input rounded-none bg-white text-black"
               required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
+            <Form.Label className="text-black">Email</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="input rounded-none"
+              className="input rounded-none bg-white text-black"
               required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicUserName">
-            <Form.Label>User Name</Form.Label>
+            <Form.Label className="text-black">User Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter user name"
               name="userName"
               value={formData.userName}
               onChange={handleChange}
-              className="input rounded-none"
+              className="input rounded-none bg-white text-black"
               required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicAddress">
-            <Form.Label>Address</Form.Label>
+            <Form.Label className="text-black">Address</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter address"
               name="address"
               value={formData.address}
               onChange={handleChange}
-              className="input rounded-none"
+              className="input rounded-none bg-white text-black"
               required
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicIsSeller">
-            <Form.Check
-              type="checkbox"
-              label="Is Seller"
-              name="isSeller"
-              checked={formData.isSeller}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicIsAdmin">
-            <Form.Check
-              type="checkbox"
-              label="Is Admin"
-              name="isAdmin"
-              checked={formData.isAdmin}
-              onChange={handleChange}
-            />
-          </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicImage">
-            <Form.Label>Image</Form.Label>
+            <Form.Label className="text-black">Image</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter image URL"
               name="image"
               value={formData.image}
               onChange={handleChange}
-              className="input rounded-none"
+              className="input rounded-none bg-white text-black"
             />
           </Form.Group>
           <Button

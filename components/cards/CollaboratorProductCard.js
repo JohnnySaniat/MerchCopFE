@@ -1,12 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { removeProductFromOrder } from '../../api/orderData';
 import { getCollaboratorById } from '../../api/collaboratorData';
 import { getProductTypeById } from '../../api/productTypeData';
 
-function CartProductCard({ productObj, orderId, onUpdate }) {
+function CollaboratorProductCard({ productObj }) {
   const [collaboratorName, setCollaboratorName] = useState('');
   const [productTypeType, setProductTypeName] = useState('');
 
@@ -31,39 +28,22 @@ function CartProductCard({ productObj, orderId, onUpdate }) {
     }
   }, [productObj.collaboratorId, productObj.typeId]);
 
-  const removeThisProduct = () => {
-    if (window.confirm(`Remove ${productObj.productName} from your cart?`)) {
-      removeProductFromOrder(orderId, productObj.id)
-        .then(() => {
-          onUpdate();
-        })
-        .catch((error) => {
-          console.error('Error removing product from order:', error);
-        });
-    }
-  };
-
   return (
-    <div className="card card-compact w-96 bg-base-100 shadow-xl m-3 h-full" data-theme="mytheme">
-      <figure>
-        <img src={productObj.image} alt={productObj.productName} className=" rounded-t-lg w-full" />
-      </figure>
+    <div data-theme="mytheme" className="card w-96 bg-neutral-800 text-white m-6 shadow-xl">
       <div className="card-body">
         <h2 className="card-title">{productObj.productName}</h2>
-        <p>Price: ${productObj.price}</p>
         <p>Collaborator: {collaboratorName}</p>
+        <p>Price: ${productObj.price}</p>
         <p>{productTypeType}</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-warning" onClick={removeThisProduct}>
-            Remove
-          </button>
-        </div>
       </div>
+      <figure>
+        <img src={productObj.image} alt={productObj.productName} />
+      </figure>
     </div>
   );
 }
 
-CartProductCard.propTypes = {
+CollaboratorProductCard.propTypes = {
   productObj: PropTypes.shape({
     id: PropTypes.number.isRequired,
     productName: PropTypes.string.isRequired,
@@ -76,8 +56,6 @@ CartProductCard.propTypes = {
     isSolvedArtistChallenge: PropTypes.bool,
     image: PropTypes.string,
   }).isRequired,
-  orderId: PropTypes.number.isRequired,
-  onUpdate: PropTypes.func.isRequired,
 };
 
-export default CartProductCard;
+export default CollaboratorProductCard;

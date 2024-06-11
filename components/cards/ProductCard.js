@@ -1,9 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react/button-has-type */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { addProductToOrder, getOpenOrder } from '../../api/orderData';
 import { deleteProductById } from '../../api/productData';
 
@@ -54,35 +53,37 @@ function ProductCard({ productObj, onToggleStaging, onUpdate }) {
   };
 
   return (
-    <Card className="complete-product-card" style={{ width: '22rem', margin: '20px' }}>
-      <Card.Img variant="top" src={productObj.image} alt={productObj.productName} className="product-card-image" />
-      <Card.Body className="product-card-body">
-        <Card.Title className="card-title">{productObj.productName}</Card.Title>
-        <Card.Text>Type ID: {productObj.typeId}</Card.Text>
-        <Card.Text className="card-description">Price: ${productObj.price}</Card.Text>
-        <Card.Text>Seller ID: {productObj.sellerId}</Card.Text>
-        <Card.Text>Is Staging: {productObj.isStaging ? 'Yes' : 'No'}</Card.Text>
-        <Card.Text>Is Solved Text: {productObj.isSolvedText ? 'Yes' : 'No'}</Card.Text>
-        <Card.Text>Is Solved Math Random: {productObj.isSolvedMathRandom ? 'Yes' : 'No'}</Card.Text>
-        <Card.Text>Is Solved Artist Challenge: {productObj.isSolvedArtistChallenge ? 'Yes' : 'No'}</Card.Text>
-        {!productObj.isStaging && (
-          <Button variant="danger" onClick={handleToggleStaging}>
-            Toggle Staging
-          </Button>
-        )}
-        {productObj.isStaging && (
-          <Button variant="danger" onClick={addToOrder}>
-            Add to Order
-          </Button>
-        )}
-        <Link href={`/product/edit/${productObj.id}`} passHref>
-          <Button className="post-card-button" variant="secondary">EDIT</Button>
-        </Link>
-        <Button className="post-card-button" variant="danger" onClick={deleteThisProduct}>
-          DELETE
-        </Button>
-      </Card.Body>
-    </Card>
+    <div className="card card-compact w-96 bg-bg-100 shadow-xl m-3 h-full" data-theme="mytheme">
+      <figure><img src={productObj.image} alt={productObj.productName} /></figure>
+      <div className="card-body">
+        <h2 className="card-title">{productObj.productName}</h2>
+        <p>Price: ${productObj.price}</p>
+        <p>Collaborator ID: {productObj.collaboratorId}</p>
+        <div className="card-actions justify-end">
+          {!productObj.isStaging && (
+            <button className="btn btn-warning w-25" onClick={handleToggleStaging}>
+              Toggle Staging
+            </button>
+          )}
+          {productObj.isStaging && (
+            <>
+              <button className="btn btn-warning w-25" onClick={handleToggleStaging}>
+                Unstage
+              </button>
+              <button className="btn btn-primary w-25" onClick={addToOrder}>
+                Add to Order
+              </button>
+            </>
+          )}
+          <a href={`/product/edit/${productObj.id}`}>
+            <button className="btn btn-primary">EDIT</button>
+          </a>
+          <button className="btn btn-primary w-25" onClick={deleteThisProduct}>
+            DELETE
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -92,7 +93,7 @@ ProductCard.propTypes = {
     productName: PropTypes.string.isRequired,
     typeId: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
-    sellerId: PropTypes.number.isRequired,
+    collaboratorId: PropTypes.number.isRequired,
     isStaging: PropTypes.bool,
     isSolvedText: PropTypes.bool,
     isSolvedMathRandom: PropTypes.bool,
