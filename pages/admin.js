@@ -46,7 +46,7 @@ function ShowAdmin() {
           {products.filter((product) => product.isStaging).length === 0 && (
             <>
               <p className="text-white">No products are currently staged.</p>
-              <div style={{ marginBottom: '30px' }} /> {/* Sizable break */}
+              <div style={{ marginBottom: '30px' }} />
             </>
           )}
           <div>
