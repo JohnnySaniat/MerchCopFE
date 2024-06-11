@@ -188,7 +188,6 @@ function StagingPage() {
                   <p>@CasualBlaine</p>
                   <p>@grittradeco</p>
                   <p>@hiGround</p>
-                  {/* Add more items as needed */}
                 </div>
               </button>
             </div>
