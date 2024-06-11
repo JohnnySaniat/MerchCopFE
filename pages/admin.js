@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Button } from 'react-bootstrap';
 import { getAllProducts, updateProductById } from '../api/productData';
 import ProductCard from '../components/cards/ProductCard';
+import UserCard from '../components/cards/UserCard';
+import { getAllUsers } from '../api/userData';
+import withAuth from '../utils/withAuth';
 
-function ShowItems() {
+function ShowAdmin() {
   const [products, setProducts] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     getAllProducts().then(setProducts);
+    getAllUsers().then(setUsers);
   }, []);
 
   const toggleStaging = async (productId) => {
     try {
+      const currentlyStagedProduct = products.find((product) => product.isStaging);
+
+      if (currentlyStagedProduct && currentlyStagedProduct.id !== productId) {
+        alert('Only one product can be staged at a time. Please unstaged the current product before staging another.');
+        return;
+      }
+
       const updatedProducts = products.map((product) => {
         if (product.id === productId) {
           return { ...product, isStaging: !product.isStaging };
@@ -29,34 +39,41 @@ function ShowItems() {
   };
 
   return (
-    <div className="h-screen">
-      <div className="text-center my-4">
-        {products.some((product) => product.isStaging) && (
-          <>
-            <h2>STAGED PRODUCTS</h2>
-            <div className="d-flex flex-wrap justify-content-center">
-              {products.filter((product) => product.isStaging).map((productObj) => (
-                <ProductCard key={productObj.id} productObj={productObj} onUpdate={getAllProducts} onToggleStaging={toggleStaging} />
-              ))}
-            </div>
-          </>
-        )}
-        {products.some((product) => !product.isStaging) && (
-          <>
-            <h2>UNSTAGED</h2>
-            <div className="d-flex flex-wrap justify-content-center">
-              {products.filter((product) => !product.isStaging).map((productObj) => (
-                <ProductCard key={productObj.id} productObj={productObj} onUpdate={getAllProducts} onToggleStaging={toggleStaging} />
-              ))}
-            </div>
-          </>
-        )}
+    <div className="home-container">
+      <div className="flex">
+        <div className="w-1/2 p-4">
+          <h2 className="card-title text-3xl text-white" style={{ display: 'flex', justifyContent: 'center' }}>STAGED PRODUCTS</h2>
+          {products.filter((product) => product.isStaging).length === 0 && (
+            <>
+              <p className="text-white">No products are currently staged.</p>
+              <div style={{ marginBottom: '30px' }} /> {/* Sizable break */}
+            </>
+          )}
+          <div>
+            {products.filter((product) => product.isStaging).map((productObj) => (
+              <ProductCard key={productObj.id} productObj={productObj} onUpdate={() => getAllProducts()} onToggleStaging={toggleStaging} />
+            ))}
+          </div>
+          <h2 className="card-title text-3xl text-white" style={{ display: 'flex', justifyContent: 'center' }}>UNSTAGED PRODUCTS</h2>
+          <div>
+            {products.filter((product) => !product.isStaging).map((productObj) => (
+              <ProductCard key={productObj.id} productObj={productObj} onUpdate={() => getAllProducts()} onToggleStaging={toggleStaging} />
+            ))}
+          </div>
+        </div>
+        <div className="w-1/2 p-4">
+          <h2 className="card-title text-3xl text-white" style={{ display: 'flex', justifyContent: 'center' }}>
+            ALL USERS
+          </h2>
+          <div>
+            {users.map((userObj) => (
+              <UserCard key={userObj.id} userObj={userObj} />
+            ))}
+          </div>
+        </div>
       </div>
-      <Link href="/product/new" passHref>
-        <Button className="user-card-button" variant="danger">Sell a Product</Button>
-      </Link>
     </div>
   );
 }
 
-export default ShowItems;
+export default withAuth(ShowAdmin, 'isAdmin');

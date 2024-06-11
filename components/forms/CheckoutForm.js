@@ -14,8 +14,8 @@ function CheckoutForm({ orderId, order }) {
     'Credit Card ending in 1234',
     'Debit Card ending in 5678',
     'Bank Transfer',
-    'Cash on Delivery',
-    'PayPal (email)',
+    'Cash on Delivery - Nashville, TN',
+    'PayPal',
   ]);
   const { user } = useAuth();
   const router = useRouter();
@@ -35,56 +35,60 @@ function CheckoutForm({ orderId, order }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Display confirmation dialog
     if (window.confirm(`Confirm order details:\nPayment Type: ${paymentType}\nTotal with Tax: ${totalWithTax}\nShipping Address: ${shippingAddress}`)) {
       try {
-        // Update the order with the new payment type
-        await updateOrder(orderId, { isComplete: true, paymentType });
-        // Redirect to cart page
+        const updatedOrder = { isComplete: true, paymentType, totalWithTax };
+        console.log('Updating order with:', updatedOrder);
+        await updateOrder(orderId, updatedOrder);
         router.push('/cart');
       } catch (error) {
         console.error('Failed to update order:', error);
-        // Handle error here
       }
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="totalWithTax">
-        <Form.Label>Total with Tax</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Total with Tax"
-          value={totalWithTax ? `$${totalWithTax.toFixed(2)}` : ''}
-          readOnly
-        />
-      </Form.Group>
+    <div data-theme="mytheme" className="card lg shadow-xl m-8 p-8 w-75">
+      <Form onSubmit={handleSubmit}>
+        <h2 className="card-title text-3xl text-white pb-4">Express Checkout</h2>
 
-      <Form.Group controlId="shippingAddress">
-        <Form.Label>Shipping Address</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Shipping Address"
-          value={shippingAddress}
-          readOnly
-        />
-      </Form.Group>
+        <Form.Group controlId="totalWithTax" className="mb-3">
+          <Form.Label className="text-white">Total with Tax</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Total with Tax"
+            value={totalWithTax ? `$${totalWithTax.toFixed(2)}` : ''}
+            readOnly
+          />
+        </Form.Group>
 
-      <Form.Group controlId="paymentType">
-        <Form.Label>Payment Type</Form.Label>
-        <Form.Control as="select" value={paymentType} onChange={handlePaymentTypeChange}>
-          <option value="">Select Payment Type</option>
-          {samplePaymentMethods.map((method) => (
-            <option key={method} value={method}>{method}</option>
-          ))}
-        </Form.Control>
-      </Form.Group>
+        <Form.Group controlId="shippingAddress" className="mb-3">
+          <Form.Label className="text-white">Shipping Address</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Shipping Address"
+            value={shippingAddress}
+            readOnly
+          />
+        </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Complete Order
-      </Button>
-    </Form>
+        <Form.Group controlId="paymentType" className="mb-3">
+          <Form.Label className="text-white">Payment Type</Form.Label>
+          <Form.Control as="select" value={paymentType} onChange={handlePaymentTypeChange}>
+            <option value="">Select Payment Type</option>
+            {samplePaymentMethods.map((method) => (
+              <option key={method} value={method}>{method}</option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button variant="primary" type="submit">
+            Complete Order
+          </Button>
+        </div>
+      </Form>
+    </div>
   );
 }
 

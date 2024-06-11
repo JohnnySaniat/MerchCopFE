@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import UserCard from '../components/cards/UserCard';
+import ProfileCard from '../components/cards/ProfileCard';
 import { useAuth } from '../utils/context/authContext';
 import { getUserDetails } from '../api/userData';
 
@@ -18,10 +18,12 @@ function Profile() {
   }, [user]);
 
   return (
-    <div className="h-screen">
-      <div className="text-center my-4">
-        <div className="d-flex flex-wrap">
-          {userDetails && <UserCard userObj={userDetails} />}
+    <div className="home-container">
+      <div className="h-screen">
+        <div className="text-center my-4">
+          <div className="d-flex flex-wrap">
+            {userDetails && <ProfileCard userObj={userDetails} />}
+          </div>
         </div>
       </div>
     </div>

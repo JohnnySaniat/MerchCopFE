@@ -16,7 +16,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
   // what the user should see if they are logged in
   if (user) {
     return (
-      <div data-theme="coffee" lang="en">
+      <div className="h-screen h-100 w-100">
         <NavBar /> {/* NavBar only visible if user is logged in and is in every view */}
         <div className="container">{'valid' in user ? <RegisterForm user={user} updateUser={updateUser} /> : <Component {...pageProps} />}</div>
       </div>

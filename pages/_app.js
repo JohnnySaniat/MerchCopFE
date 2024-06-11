@@ -6,7 +6,7 @@ import ViewDirectorBasedOnUserAuthStatus from '../utils/ViewDirector';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div data-theme="dim">
+    <div>
       <AuthProvider>
         {' '}
         {/* gives children components access to user and auth methods */}

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { updateUser } from '../../api/userData';
 
@@ -56,41 +55,45 @@ function UpdateUserForm({ userObj }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicFirstName">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control type="text" name="firstName" required placeholder="Enter your First Name" value={formData.firstName} onChange={handleInputChange} />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicLastName">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control type="text" name="lastName" required placeholder="Enter your Last Name" value={formData.lastName} onChange={handleInputChange} />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicUserName">
-        <Form.Label>Username</Form.Label>
-        <Form.Control type="text" name="userName" required placeholder="Enter your Username" value={formData.userName} onChange={handleInputChange} />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicAddress">
-        <Form.Label>Address</Form.Label>
-        <Form.Control type="text" name="address" required placeholder="Enter your Address" value={formData.address} onChange={handleInputChange} />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="email" name="email" required placeholder="Enter your Email" value={formData.email} onChange={handleInputChange} />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicImage">
-        <Form.Label>Image URL</Form.Label>
-        <Form.Control type="text" name="image" required placeholder="Enter your Image URL" value={formData.image} onChange={handleInputChange} />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicIsSeller">
-        <Form.Check type="checkbox" label="Are you a seller?" name="isSeller" checked={formData.isSeller} onChange={handleCheckboxChange} />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicIsAdmin">
-        <Form.Check type="checkbox" label="Are you an admin?" name="isAdmin" checked={formData.isAdmin} onChange={handleCheckboxChange} />
-      </Form.Group>
-      <Button variant="danger" className="user-card-button" type="submit">
-        Submit
-      </Button>
-    </Form>
+    <div data-theme="mytheme" className="card lg shadow-xl m-8 p-8 w-50">
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3 text-white" controlId="formBasicFirstName">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control type="text" name="firstName" required placeholder="Enter your First Name" value={formData.firstName} onChange={handleInputChange} />
+        </Form.Group>
+        <Form.Group className="mb-3 text-white" controlId="formBasicLastName">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control type="text" name="lastName" required placeholder="Enter your Last Name" value={formData.lastName} onChange={handleInputChange} />
+        </Form.Group>
+        <Form.Group className="mb-3 text-white" controlId="formBasicUserName">
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" name="userName" required placeholder="Enter your Username" value={formData.userName} onChange={handleInputChange} />
+        </Form.Group>
+        <Form.Group className="mb-3 text-white" controlId="formBasicAddress">
+          <Form.Label>Address</Form.Label>
+          <Form.Control type="text" name="address" required placeholder="Enter your Address" value={formData.address} onChange={handleInputChange} />
+        </Form.Group>
+        <Form.Group className="mb-3 text-white" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" name="email" required placeholder="Enter your Email" value={formData.email} onChange={handleInputChange} />
+        </Form.Group>
+        <Form.Group className="mb-3 text-white" controlId="formBasicImage">
+          <Form.Label>Image URL</Form.Label>
+          <Form.Control type="text" name="image" required placeholder="Enter your Image URL" value={formData.image} onChange={handleInputChange} />
+        </Form.Group>
+        <Form.Group className="mb-3 text-white" controlId="formBasicIsSeller">
+          <Form.Check type="checkbox" label="Are you a seller?" name="isSeller" checked={formData.isSeller} onChange={handleCheckboxChange} />
+        </Form.Group>
+        <Form.Group className="mb-3 text-white" controlId="formBasicIsAdmin">
+          <Form.Check type="checkbox" label="Are you an admin?" name="isAdmin" checked={formData.isAdmin} onChange={handleCheckboxChange} />
+        </Form.Group>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <button className="user-card-button btn btn-warning w-50" type="submit">
+            Submit
+          </button>
+        </div>
+      </Form>
+    </div>
   );
 }
 

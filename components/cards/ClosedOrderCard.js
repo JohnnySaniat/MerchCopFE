@@ -2,23 +2,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function OrderCard({ orderObj }) {
+function ClosedOrderCard({ orderObj }) {
   return (
-    <div className="card w-96 bg-base-100 shadow-xl m-2" data-theme="mytheme">
+    <div className="card w-96 bg-base-100 shadow-xl m-4" data-theme="mytheme">
       <div className="card-body">
         <h2 className="card-title text-3xl text-white" style={{ display: 'flex', justifyContent: 'center' }}>
           Order ID: {orderObj.id}
         </h2>
-        <div>
-          {orderObj.isComplete ? (
-            <div>Status: Closed</div>
-          ) : (
-            <div>Status: Current Order</div>
-          )}
-        </div>
+        <div>Status: Closed</div>
         <div className="card-actions justify-center flex">
-          <a className="btn btn-warning" href={`/order/${orderObj.id}`}>
-            View Details
+          <a className="btn btn-warning" href={`/order/receipt/${orderObj.id}`} rel="noopener noreferrer">
+            View Receipt
           </a>
         </div>
       </div>
@@ -26,7 +20,7 @@ function OrderCard({ orderObj }) {
   );
 }
 
-OrderCard.propTypes = {
+ClosedOrderCard.propTypes = {
   orderObj: PropTypes.shape({
     id: PropTypes.number.isRequired,
     userId: PropTypes.number.isRequired,
@@ -34,4 +28,4 @@ OrderCard.propTypes = {
   }).isRequired,
 };
 
-export default OrderCard;
+export default ClosedOrderCard;

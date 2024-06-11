@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { FaShoppingCart, FaEdit } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 
-function UserCard({ userObj }) {
+function ProfileCard({ userObj }) {
   return (
-    <div className="card w-96 bg-base-100 text-white shadow-xl m-5">
+    <div className="card w-96 bg-bg-100 text-white shadow-xl m-5" data-theme="mytheme">
       <figure>
         <img src={userObj.image} alt={userObj.uid} className="h-72 w-72 object-cover rounded-full mx-auto mt-4" />
       </figure>
@@ -17,16 +17,11 @@ function UserCard({ userObj }) {
         <p className="card-text">Username: {userObj.userName}</p>
         <p className="card-text">Address: {userObj.address}</p>
         <p className="card-text">Email: {userObj.email}</p>
-        <p className="card-text">Is Seller: {userObj.isSeller ? 'Yes' : 'No'}</p>
+
         <div className="card-actions justify-end mt-4">
           <Link href="/cart" passHref>
             <button type="button" className="btn btn-warning mr-2">
               <FaShoppingCart /> Active Orders
-            </button>
-          </Link>
-          <Link href={`/user/${userObj.uid}`} passHref>
-            <button type="button" className="btn btn-danger">
-              <FaEdit /> EDIT
             </button>
           </Link>
         </div>
@@ -35,7 +30,7 @@ function UserCard({ userObj }) {
   );
 }
 
-UserCard.propTypes = {
+ProfileCard.propTypes = {
   userObj: PropTypes.shape({
     id: PropTypes.number.isRequired,
     uid: PropTypes.string.isRequired,
@@ -50,4 +45,4 @@ UserCard.propTypes = {
   }).isRequired,
 };
 
-export default UserCard;
+export default ProfileCard;

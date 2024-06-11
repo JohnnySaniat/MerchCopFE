@@ -166,6 +166,41 @@ const updateOrder = (orderId, updatedOrder) => new Promise((resolve, reject) => 
     .catch(reject);
 });
 
+const getOrdersByUserId = (id) => new Promise((resolve, reject) => {
+  fetch(`https://localhost:7043/orders/user/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => resolve(data))
+    .catch((error) => reject(error));
+});
+
+const createOrderForUser = (order, userId) => new Promise((resolve, reject) => {
+  fetch(`https://localhost:7043/orders/user/${userId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(order),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to create order');
+      }
+      return response.json();
+    })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getAllOrders,
   getOrderById,
@@ -177,4 +212,6 @@ export {
   getOrderProducts,
   getOpenOrder,
   updateOrder,
+  getOrdersByUserId,
+  createOrderForUser,
 };
