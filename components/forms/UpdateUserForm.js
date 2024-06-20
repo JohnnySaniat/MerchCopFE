@@ -30,7 +30,7 @@ function UpdateUserForm({ userObj }) {
     e.preventDefault();
     updateUser(formData.id, formData)
       .then((updatedUser) => {
-        router.push('/profile');
+        router.push('/admin');
         console.log('User updated:', updatedUser);
       })
       .catch((error) => {

@@ -129,7 +129,7 @@ a {
   border: none;
   background: none;
   cursor: pointer;
-  margin-bottom: 20px; /* Adjust as needed */
+  margin-bottom: 20px;
 }
 
 .back-image {
@@ -137,8 +137,8 @@ a {
 }
 
 .scroll-button {
-  width: 50%; /* Adjust width as needed */
-  max-height: 200px; /* Adjust maximum height as needed */
+  width: 50%;
+  max-height: 200px; 
   overflow: hidden;
   position: relative;
 }

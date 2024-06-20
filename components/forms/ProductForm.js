@@ -50,14 +50,22 @@ function ProductForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = { ...formInput, sellerId: user.id };
-    if (obj.id) {
-      updateProductById(obj.id, payload)
-        .catch((error) => console.error('Error updating product:', error));
-      router.push('/admin');
-    } else {
-      createProduct(payload)
-        .catch((error) => console.error('Error creating product:', error));
-      router.push('/admin');
+    const confirmationMessage = `Are you sure you want to ${
+      obj.id ? 'update' : 'create'
+    } this product?\n\nProduct Name: ${formInput.productName}\nProduct Type: ${
+      formInput.typeId
+    }\nPrice: ${formInput.price}`;
+
+    if (window.confirm(confirmationMessage)) {
+      if (obj.id) {
+        updateProductById(obj.id, payload)
+          .catch((error) => console.error('Error updating product:', error));
+        router.push('/admin');
+      } else {
+        createProduct(payload)
+          .catch((error) => console.error('Error creating product:', error));
+        window.location.reload();
+      }
     }
   };
 

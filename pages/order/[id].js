@@ -48,7 +48,6 @@ export default function ViewOrder() {
         </div>
       </div>
 
-      {/* Vertically split layout for products and express checkout */}
       <div className="flex h-full">
         <div className="flex-1">
           <div className="text-center my-4">

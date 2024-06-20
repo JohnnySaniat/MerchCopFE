@@ -7,7 +7,7 @@ function AddProduct() {
   const router = useRouter();
 
   const handleBack = () => {
-    router.push('/admin'); // Adjust the route as needed
+    router.push('/admin');
   };
 
   return (
