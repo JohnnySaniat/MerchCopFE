@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { getProductById } from '../../api/productData';
+import withAuth from '../../utils/withAuth';
 
-export default function ViewProduct() {
+function ViewProduct() {
   const [productObj, setProductDetails] = useState({});
   const router = useRouter();
 
@@ -29,3 +30,5 @@ export default function ViewProduct() {
     </Card>
   );
 }
+
+export default withAuth(ViewProduct, 'withAuth');

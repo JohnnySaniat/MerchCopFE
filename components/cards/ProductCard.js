@@ -16,7 +16,6 @@ function ProductCard({ productObj, onToggleStaging, onUpdate }) {
   const addToOrder = async () => {
     try {
       const openOrders = await getOpenOrder();
-      console.log('Open orders:', openOrders);
 
       if (!openOrders || openOrders.length === 0) {
         console.error('No open orders found.');

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { createUser, updateUser } from '../../api/userData';
 import { useAuth } from '../../utils/context/authContext';
@@ -56,87 +55,92 @@ function RegisterForm({ userObj, onUpdate }) {
   }, [userObj]);
 
   return (
-    <div className="flex w-[500px] mx-auto inter-normal text-white">
-      <div className="mx-auto mt-32">
-        <Form onSubmit={handleSubmit} className="w-96">
-          <Form.Group className="mb-3" controlId="formBasicFirstName">
-            <Form.Label className="text-black">First Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter first name"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              className="input rounded-none bg-white text-black"
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicLastName">
-            <Form.Label className="text-black">Last Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter last name"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              className="input rounded-none bg-white text-black"
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label className="text-black">Email</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="input rounded-none bg-white text-black"
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicUserName">
-            <Form.Label className="text-black">User Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter user name"
-              name="userName"
-              value={formData.userName}
-              onChange={handleChange}
-              className="input rounded-none bg-white text-black"
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicAddress">
-            <Form.Label className="text-black">Address</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter address"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              className="input rounded-none bg-white text-black"
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicImage">
-            <Form.Label className="text-black">Image</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter image URL"
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
-              className="input rounded-none bg-white text-black"
-            />
-          </Form.Group>
-          <Button
-            type="submit"
-            className="bg-slate-800 border-none hover:bg-slate-800 text-white font-semibold rounded-sm mt-2"
-          >
-            Register
-          </Button>
-        </Form>
+    <div data-theme="mytheme" className="card lg shadow-xl w-50">
+      <div className="flex w-[500px] mx-auto inter-normal text-white">
+        <div className="mx-auto mt-12 pb-3">
+          <h2 className="card-title text-4xl text-white pb-6" style={{ display: 'flex', justifyContent: 'center' }}>Welcome</h2>
+          <Form onSubmit={handleSubmit} className="w-96">
+            <Form.Group className="mb-3" controlId="formBasicFirstName">
+              <Form.Label className="text-white">First Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter first name"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                className="input rounded-none bg-white text-black"
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicLastName">
+              <Form.Label className="text-white">Last Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter last name"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                className="input rounded-none bg-white text-black"
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label className="text-white">Email</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="input rounded-none bg-white text-black"
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicUserName">
+              <Form.Label className="text-white">User Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter user name"
+                name="userName"
+                value={formData.userName}
+                onChange={handleChange}
+                className="input rounded-none bg-white text-black"
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicAddress">
+              <Form.Label className="text-white">Address</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter address"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                className="input rounded-none bg-white text-black"
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicImage">
+              <Form.Label className="text-white">Image</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter image URL"
+                name="image"
+                value={formData.image}
+                onChange={handleChange}
+                className="input rounded-none bg-white text-black"
+              />
+            </Form.Group>
+            <div style={{ display: 'flex', justifyContent: 'Center' }}>
+              <button
+                type="submit"
+                className="btn btn-warning text-white mt-2 w-75 mt-3 mb-1"
+              >
+                Register
+              </button>
+            </div>
+          </Form>
+        </div>
       </div>
     </div>
   );

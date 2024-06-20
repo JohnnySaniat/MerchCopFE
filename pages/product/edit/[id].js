@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getProductById } from '../../../api/productData';
 import ProductForm from '../../../components/forms/ProductForm';
+import withAuth from '../../../utils/withAuth';
 
 function EditProduct() {
   const [editProduct, setEditProduct] = useState({});
@@ -15,7 +16,7 @@ function EditProduct() {
   }, [id]);
 
   const handleBack = () => {
-    router.push('/admin'); // Adjust the route as needed
+    router.push('/admin');
   };
 
   return (
@@ -37,4 +38,4 @@ function EditProduct() {
   );
 }
 
-export default EditProduct;
+export default withAuth(EditProduct, 'isAdmin');

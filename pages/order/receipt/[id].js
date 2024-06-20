@@ -12,7 +12,6 @@ function ReceiptPage() {
   useEffect(() => {
     if (id) {
       getOrderById(id).then((data) => {
-        // Round totalWithTax to two decimal points
         const roundedData = { ...data, totalWithTax: data.totalWithTax.toFixed(2) };
         setOrderDetails(roundedData);
       });
