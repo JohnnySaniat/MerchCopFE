@@ -184,10 +184,11 @@ function StagingPage() {
             <div>
               <h2 className="card-title text-3xl text-white" style={{ display: 'flex', justifyContent: 'center' }}>NO PRODUCTS AVAILABLE</h2> <p className="card-title text-xl text-white" style={{ display: 'flex', justifyContent: 'center' }}> Take a peek at all of our collaborators! </p>
               <button type="button" className="btn btn-warning w-50 mt-4 scroll-button" onClick={checkOutTheCollaborators}>
-                <div className="scrolling-list text-4xl">
+                <div className="scrolling-list text-3xl">
                   <p>@CasualBlaine</p>
                   <p>@grittradeco</p>
                   <p>@hiGround</p>
+                  <p>@crapeyeware</p>
                 </div>
               </button>
             </div>

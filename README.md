@@ -1,44 +1,58 @@
-# React/Next.js Django Auth Template
+# MerchCop E-commerce Platform
 
-## Topics
-- [Get Started](#getting-started)
-- [Starting the Project](#starting-the-project)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+## Welcome to MerchCop!
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+Congratulations on joining our team! We're embarking on an exciting project to develop the MerchCop E-commerce Platform, aimed at revolutionizing the way limited merchandise drops are handled. With your skills and dedication, we're confident that we'll deliver an exceptional solution.
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+## Project Description
 
-## Starting the Project
-1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
-1. Create a `.env` file at the root of the project
-1. Copy/Paste the contents of the `.env.sample` file to your newly created `.env` file.
-1. Copy over all of your Firebase values into the `.env` file.
-1. Open the `package.json` file and change the `name` property to the name of your application, and `author` to  your name.
-1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
-1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
-1. To start your application, run `npm run dev`. THIS IS THE COMMAND YOU WILL USE TO RUN YOUR DEVELOPMENT SERVER FROM NOW ON.
-1. Open [http://localhost:3000](http://localhost:3000) with your browser.
+The MerchCop E-commerce Platform is designed to provide a unique and fair shopping experience for customers seeking exclusive merchandise drops. Our goal is to prevent bot purchases and ensure genuine fans have access to limited items. The platform will feature user challenges, authentication mechanisms, and seamless shopping processes.
 
-### If you see this, you are set to go!
-<img width="450" alt="Screen Shot 2022-07-06 at 1 07 27 PM" src="https://user-images.githubusercontent.com/29741570/177615077-9b6a75bc-0260-4d29-bb88-bd95a3140687.png">
+## Project Planning
 
+To ensure the success of our project, we've meticulously planned each phase. Here's an overview of our planning documentation:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- **Detailed Project Requirements**: We've outlined specific features and functionalities requested by the client, serving as our roadmap.
+  
+- **Tickets for Planning and Tracking**: We've created a set of tickets to capture planning tasks and track progress. These tickets break down the project into manageable tasks, ensuring organization and accountability.
+  
+- **Client Feature Requirements**: We've compiled a list of features requested by the client, covering customer registration, product management, order processing, and more.
 
-**NOTES:** 
-- If you see the following error, you did not follow all the setup steps correctly and failed to add your Firebase creds. Go back and do that NOW.
+## Planning and Implementation Guidelines
 
-<img width="1043" alt="Screen Shot 2022-07-06 at 11 18 45 AM" src="https://user-images.githubusercontent.com/29741570/177612501-c2628f18-4bbd-4de9-aae6-27ffba1172d6.png">
-        
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
+To meet client expectations and adhere to best practices, we've established essential guidelines:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Comprehensive Wireframes**: We've created wireframes to visualize the user journey and interface interactions, guiding design and development efforts.
+  
+- **Database Design (ERD)**: We've designed a database schema to organize and structure data effectively, mapping out entity relationships.
+  
+- **Project Board**: Our project board serves as a central hub for planning, organizing, and tracking progress, with each ticket representing a specific task or feature.
+  
+- **Collaboration and Communication**: We'll utilize GitHub Discussion Tickets for efficient communication, seeking assistance, and providing feedback throughout the project.
+  
+- **Coding Standards**: We'll adhere to community coding guidelines, ensuring clean, readable, and well-documented code.
+
+## Planning Process Tracking
+
+To facilitate an organized workflow, we've created a set of tickets for tracking progress and completing planning tasks systematically. These tickets guide the essential steps of the planning process:
+
+1. **Create Project Board**
+2. **Define MVP Features**
+3. **Write ERD**
+4. **Create Wireframe**
+5. **Create Presentation**
+6. **Submit Proposal Links**
+7. **Conduct Proposal Approval Meeting**
+8. **MVP Approval Checklist**
+
+Following this order builds a solid foundation for the project, with detailed instructions and checklists provided for each ticket.
+
+## Support and Mentorship
+
+Throughout the project, our team of senior engineers will provide guidance and support. They'll be available to review discussion tickets, provide feedback, and answer questions during designated meeting times.
+
+## Let's Build Something Great!
+
+With a clear plan, well-defined requirements, and the support of our senior engineers, we're ready to embark on this exciting journey. Together, we'll create a robust and user-friendly e-commerce platform that exceeds expectations. Let's collaborate, learn, and deliver an outstanding product!
+
+Happy coding!
